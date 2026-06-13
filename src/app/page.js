@@ -4,6 +4,7 @@ import AboutSection from '@/components/landing/AboutSection';
 import StandoutFeatures from '@/components/landing/StandoutFeatures';
 import USPSection from '@/components/landing/USPSection';
 import CTASection from '@/components/landing/CTASection';
+import ContactSection from '@/components/landing/ContactSection';
 import Footer from '@/components/landing/Footer';
 
 export default function LandingPage() {
@@ -16,6 +17,7 @@ export default function LandingPage() {
         <StandoutFeatures />
         <USPSection />
         <CTASection />
+        <ContactSection />
       </main>
       <Footer />
     </div>
