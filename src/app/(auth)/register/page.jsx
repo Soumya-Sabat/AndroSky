@@ -1,39 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { registerUser } from '@/auth'
 
 export default function RegisterPage() {
   const router = useRouter()
-
-    const tags = [
-    "Next-Gen Task Management",
-    "Orchestrate Your Clusters",
-    "Zero-Knowledge Privacy",
-    "AI-Powered Navigation",
-    "Gamified Productivity Hub",
-    "Quantum Flow Soundscapes",
-    "Sync Across the Fleet"
-  ];
-  const [currentTagIndex, setCurrentTagIndex] = useState(0);
-  const [isFade, setIsFade] = useState(false);
-
-    useEffect(() => {
-      const interval = setInterval(() => {
-        // Start fade out slightly before changing text
-        setIsFade(true);
-        
-        setTimeout(() => {
-          setCurrentTagIndex((prevIndex) => (prevIndex + 1) % tags.length); // the array will never overflow
-          setIsFade(false);
-        }, 300); // This matches our transition duration
-  
-      }, 1200); // Swaps text roughly every second including animation buffer
-  
-      return () => clearInterval(interval);
-    }, [tags.length]);
-
   const [formData, setFormData] = useState({
     email: '',
     username: '',
@@ -42,7 +15,6 @@ export default function RegisterPage() {
   const [status, setStatus] = useState({ type: '', message: '' })
   const [isLoading, setIsLoading] = useState(false)
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault()
     
@@ -75,16 +47,19 @@ export default function RegisterPage() {
     setIsLoading(true)
     setStatus({ type: 'loading', message: 'Launching your odyssey...' })
 
-    // Simulate API call - Will connect to Supabase auth
-    setTimeout(() => {
-      setIsLoading(false)
+    // Register user with Supabase
+    const result = await registerUser(formData.email, formData.username)
+    
+    if (result.success) {
       setStatus({ type: 'success', message: 'Account created! Redirecting to your dashboard...' })
       
-      // Redirect to dashboard after successful registration
       setTimeout(() => {
         router.push('/dashboard')
       }, 1500)
-    }, 1500)
+    } else {
+      setStatus({ type: 'error', message: result.error || 'Registration failed. Please try again.' })
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -176,8 +151,8 @@ export default function RegisterPage() {
               disabled={isLoading}
             />
             <label htmlFor="terms" className="text-xs text-[var(--text-primary)] font-['Inter'] leading-relaxed">
-              I agree to the <Link href="/terms" className="text-[var(--accent-cyan)] hover:underline">Cosmic Terms of Service</Link> and 
-              <Link href="/privacy" className="text-[var(--accent-cyan)] hover:underline ml-1">Starlight Privacy Policy</Link>
+              I agree to the <Link href="/cosmic-terms" className="text-[var(--accent-cyan)] hover:underline">Cosmic Terms of Service</Link> and 
+              <Link href="/starlight-privacy" className="text-[var(--accent-cyan)] hover:underline ml-1">Starlight Privacy Policy</Link>
             </label>
           </div>
 
@@ -242,7 +217,7 @@ export default function RegisterPage() {
       {/* Info Note */}
       <div className="text-center mt-6">
         <p className="text-xs text-[var(--text-primary)]/40 font-['JetBrains_Mono']">
-          🚀 Passwordless • No credit card required • Start for free
+           Passwordless • No credit card required • Start for free
         </p>
       </div>
     </div>

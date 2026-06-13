@@ -1,9 +1,9 @@
-// src/app/(auth)/login/page.jsx
 'use client'
 
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { loginUser, sendMagicLink } from '@/auth'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -28,16 +28,38 @@ export default function LoginPage() {
     setIsLoading(true)
     setStatus({ type: 'loading', message: 'Verifying cosmic credentials...' })
 
-    // Simulate API call - Will connect to Supabase auth
-    setTimeout(() => {
+    // Send magic link
+    const result = await sendMagicLink(email)
+    
+    if (result.success) {
+      setStatus({ 
+        type: 'success', 
+        message: 'Magic link sent! Check your email to login.' 
+      })
       setIsLoading(false)
-      setStatus({ type: 'success', message: 'Login successful! Redirecting...' })
+    } else {
+      // If magic link fails, try login
+      const loginResult = await loginUser(email)
       
-      // Redirect to dashboard after successful login
-      setTimeout(() => {
-        router.push('/dashboard')
-      }, 1500)
-    }, 1500)
+      if (loginResult.success && loginResult.requiresMagicLink) {
+        setStatus({ 
+          type: 'success', 
+          message: loginResult.message || 'Magic link sent to your email!' 
+        })
+        setIsLoading(false)
+      } else if (loginResult.success && loginResult.session) {
+        setStatus({ type: 'success', message: 'Login successful! Redirecting...' })
+        setTimeout(() => {
+          router.push('/dashboard')
+        }, 1500)
+      } else {
+        setStatus({ 
+          type: 'error', 
+          message: loginResult.error || 'Login failed. Please try again.' 
+        })
+        setIsLoading(false)
+      }
+    }
   }
 
   return (
@@ -77,7 +99,7 @@ export default function LoginPage() {
               />
             </div>
             <p className="text-xs text-[var(--text-primary)]/50 mt-2 font-['Inter']">
-              No password needed. We'll authenticate you instantly.
+              We'll send a magic link to your email. No password needed.
             </p>
           </div>
 
@@ -93,11 +115,11 @@ export default function LoginPage() {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                Verifying...
+                Sending Magic Link...
               </span>
             ) : (
               <span className="flex items-center justify-center gap-2">
-                Continue to Dashboard
+                Continue with Email
                 <span className="material-symbols-outlined text-sm">arrow_forward</span>
               </span>
             )}
@@ -143,7 +165,7 @@ export default function LoginPage() {
       {/* Info Note */}
       <div className="text-center mt-6">
         <p className="text-xs text-[var(--text-primary)]/40 font-['JetBrains_Mono']">
-          🔐 Passwordless authentication • No passwords to remember • Instant access
+          🔐 Passwordless authentication • Magic link sent to your email • Instant access
         </p>
       </div>
     </div>
