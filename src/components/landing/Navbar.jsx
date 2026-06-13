@@ -9,10 +9,10 @@ export default function Navbar() {
           </span>
         </div>
         <div className="hidden md:flex items-center gap-8">
-          <a className="text-sm font-medium text-[#bec6e0] border-b-2 border-[#bec6e0] pb-1" href="#">Missions</a>
-          <a className="text-sm font-medium text-[#c6c6cd] hover:text-[#bec6e0] transition-colors" href="#">Clusters</a>
-          <a className="text-sm font-medium text-[#c6c6cd] hover:text-[#bec6e0] transition-colors" href="#">Academy</a>
-          <a className="text-sm font-medium text-[#c6c6cd] hover:text-[#bec6e0] transition-colors" href="#">Galaxy Map</a>
+          <a className="text-sm font-medium text-[#bec6e0] border-b-2 border-[#bec6e0] pb-1" href="/missions">Missions</a>
+          <a className="text-sm font-medium text-[#c6c6cd] hover:text-[#bec6e0] transition-colors" href="/clusters">Clusters</a>
+          <a className="text-sm font-medium text-[#c6c6cd] hover:text-[#bec6e0] transition-colors" href="/">Academy</a>
+          <a className="text-sm font-medium text-[#c6c6cd] hover:text-[#bec6e0] transition-colors" href="/">Galaxy Map</a>
         </div>
         <div className="flex items-center gap-4">
           <button className="hidden lg:block text-[#c6c6cd] hover:text-[#bec6e0] transition-colors text-sm font-medium">Login</button>
