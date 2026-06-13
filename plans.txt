@@ -1,0 +1,35 @@
+ What's Coming Next (Phase 2)
+
+After you confirm, I'll help you build:
+
+    Authentication System
+
+        Passwordless email login
+
+        JWT session management
+
+        Dashboard protection
+
+    User Dashboard
+
+        Personal/Professional realm toggle
+
+        Task management interface
+
+        XP and level display
+
+    Cluster System
+
+        Create cluster with 5-char codes
+
+        Join via code
+
+        Shared tasks
+
+    Gamification Engine
+
+        XP rewards on task completion
+
+        Level progression
+
+        Achievement badges
