@@ -1,5 +1,5 @@
-import Navbar from '@/components/landing/Navbar'
-import Footer from '@/components/landing/Footer'
+import Navbar from '@/component/landing/Navbar'
+import Footer from '@/component/landing/Footer'
 
 export const metadata = {
   title: 'Clusters - Collaborative Task Groups | NebulaTasks',

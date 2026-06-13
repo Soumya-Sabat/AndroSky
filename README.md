@@ -109,7 +109,7 @@ nebulatasks/
 │   │   └── cluster/
 │   │       ├── [id]/page.jsx       # Cluster detail view
 │   │       └── create/page.jsx     # Create cluster flow
-│   ├── components/
+│   ├── component/
 │   │   ├── landing/                # ✅ Completed
 │   │   │   ├── Hero.jsx
 │   │   │   ├── Features.jsx
@@ -121,7 +121,7 @@ nebulatasks/
 │   │   │   ├── RealmToggle.jsx
 │   │   │   ├── ClusterWidget.jsx
 │   │   │   └── RewardsPanel.jsx
-│   │   ├── ui/                     # Reusable components
+│   │   ├── ui/                     # Reusable component
 │   │   │   ├── Button.jsx
 │   │   │   ├── Modal.jsx
 │   │   │   ├── Celebration.jsx

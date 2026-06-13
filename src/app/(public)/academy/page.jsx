@@ -1,5 +1,5 @@
-import Navbar from '@/components/landing/Navbar'
-import Footer from '@/components/landing/Footer'
+import Navbar from '@/component/landing/Navbar'
+import Footer from '@/component/landing/Footer'
 import Link from 'next/link'
 
 export const metadata = {
