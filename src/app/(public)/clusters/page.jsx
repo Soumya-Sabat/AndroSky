@@ -1,5 +1,6 @@
 import Navbar from '@/component/landing/Navbar'
 import Footer from '@/component/landing/Footer'
+import Link from 'next/link'
 
 export const metadata = {
   title: 'Clusters - Collaborative Task Groups | AndroSky',
@@ -131,9 +132,11 @@ export default function ClustersPage() {
           <div className="glass rounded-3xl p-8">
             <h3 className="font-['Space_Grotesk'] text-2xl font-bold text-white mb-3">Ready to Collaborate?</h3>
             <p className="text-[var(--text-primary)] mb-6">Create your first cluster and invite your team.</p>
-            <button className="button-gradient px-8 py-3 rounded-full text-white font-['Space_Grotesk'] font-bold">
+            <Link 
+            href="/#"
+            className="button-gradient px-8 py-3 rounded-full text-white font-['Space_Grotesk'] font-bold">
               Start a Cluster
-            </button>
+            </Link>
           </div>
         </div>
       </main>
