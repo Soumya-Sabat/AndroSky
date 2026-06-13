@@ -1,7 +1,23 @@
-export default function Home() {
+import Navbar from '@/components/landing/Navbar';
+import HeroSection from '@/components/landing/HeroSection';
+import AboutSection from '@/components/landing/AboutSection';
+import StandoutFeatures from '@/components/landing/StandoutFeatures';
+import USPSection from '@/components/landing/USPSection';
+import CTASection from '@/components/landing/CTASection';
+import Footer from '@/components/landing/Footer';
+
+export default function LandingPage() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  )
+    <div className="relative min-dvh-">
+      <Navbar />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <StandoutFeatures />
+        <USPSection />
+        <CTASection />
+      </main>
+      <Footer />
+    </div>
+  );
 }
