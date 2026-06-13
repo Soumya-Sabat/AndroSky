@@ -4,8 +4,8 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 
 export const metadata = {
-  title: 'Transmission Hub - News & Updates | NebulaTasks',
-  description: 'Latest news, product updates, and announcements from the NebulaTasks team.',
+  title: 'Transmission Hub - News & Updates | AndroSky',
+  description: 'Latest news, product updates, and announcements from the AndroSky team.',
 }
 
 // This is a Server Component - data fetched at build time
@@ -52,7 +52,7 @@ export default async function TransmissionHubPage() {
               Transmission <span className="gradient-text">Hub</span>
             </h1>
             <p className="text-[var(--text-variant)] text-lg max-w-2xl mx-auto font-['Inter']">
-              News, updates, and insights from the NebulaTasks team.
+              News, updates, and insights from the AndroSky team.
             </p>
           </div>
 

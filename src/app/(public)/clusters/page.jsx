@@ -2,7 +2,7 @@ import Navbar from '@/component/landing/Navbar'
 import Footer from '@/component/landing/Footer'
 
 export const metadata = {
-  title: 'Clusters - Collaborative Task Groups | NebulaTasks',
+  title: 'Clusters - Collaborative Task Groups | AndroSky',
   description: 'Create private clusters for team collaboration. Share tasks, track progress together, and earn team rewards.',
 }
 

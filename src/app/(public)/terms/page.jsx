@@ -2,8 +2,8 @@ import Navbar from '@/component/landing/Navbar'
 import Footer from '@/component/landing/Footer'
 
 export const metadata = {
-  title: 'Cosmic Terms of Service - NebulaTasks',
-  description: 'Terms of service governing your use of NebulaTasks. Fair, transparent, and legally compliant.',
+  title: 'Cosmic Terms of Service - AndroSky',
+  description: 'Terms of service governing your use of AndroSky. Fair, transparent, and legally compliant.',
 }
 
 export default function CosmicTermsPage() {
@@ -19,7 +19,7 @@ export default function CosmicTermsPage() {
               Cosmic <span className="gradient-text">Terms</span>
             </h1>
             <p className="text-[var(--text-variant)] text-lg max-w-2xl mx-auto font-['Inter']">
-              By using NebulaTasks, you agree to these terms. Please read them carefully.
+              By using AndroSky, you agree to these terms. Please read them carefully.
             </p>
           </div>
 
@@ -39,9 +39,9 @@ export default function CosmicTermsPage() {
             <section>
               <h2 className="font-['Space_Grotesk'] text-2xl font-bold text-white mb-4">1. Acceptance of Terms</h2>
               <p className="text-[var(--text-primary)] font-['Inter'] text-sm leading-relaxed">
-                By accessing or using NebulaTasks ("the Service"), you agree to be bound by these Terms of Service. 
+                By accessing or using AndroSky ("the Service"), you agree to be bound by these Terms of Service. 
                 If you disagree with any part, you may not access the Service. These terms constitute a legally binding 
-                agreement between you ("User") and NebulaTasks ("Company").
+                agreement between you ("User") and AndroSky ("Company").
               </p>
             </section>
 
@@ -49,7 +49,7 @@ export default function CosmicTermsPage() {
             <section>
               <h2 className="font-['Space_Grotesk'] text-2xl font-bold text-white mb-4">2. Eligibility</h2>
               <div className="space-y-3 text-[var(--text-primary)] font-['Inter'] text-sm">
-                <p>• You must be at least <strong className="text-white">13 years old</strong> to use NebulaTasks (or 16 in the EU)</p>
+                <p>• You must be at least <strong className="text-white">13 years old</strong> to use AndroSky (or 16 in the EU)</p>
                 <p>• If you are under 18, you confirm that you have parental/guardian consent</p>
                 <p>• You represent that you are not located in a country subject to US embargo</p>
                 <p>• You are not listed on any prohibited party list</p>
@@ -63,7 +63,7 @@ export default function CosmicTermsPage() {
             <section>
               <h2 className="font-['Space_Grotesk'] text-2xl font-bold text-white mb-4">3. User Accounts</h2>
               <div className="space-y-3 text-[var(--text-primary)] font-['Inter'] text-sm">
-                <p>• You are responsible for safeguarding your email account used with NebulaTasks</p>
+                <p>• You are responsible for safeguarding your email account used with AndroSky</p>
                 <p>• You are responsible for all activity under your account</p>
                 <p>• You must immediately notify us of any unauthorized use</p>
                 <p>• We reserve the right to suspend accounts violating these terms</p>
@@ -91,7 +91,7 @@ export default function CosmicTermsPage() {
             <section>
               <h2 className="font-['Space_Grotesk'] text-2xl font-bold text-white mb-4">5. Intellectual Property</h2>
               <div className="space-y-3 text-[var(--text-primary)] font-['Inter'] text-sm">
-                <p>• NebulaTasks, the logo, and all original content are property of the Company</p>
+                <p>• AndroSky, the logo, and all original content are property of the Company</p>
                 <p>• You retain ownership of your task data and content</p>
                 <p>• You grant us a license to host and display your content to provide the Service</p>
                 <p>• You may not copy, modify, or distribute our code or design without permission</p>
@@ -102,7 +102,7 @@ export default function CosmicTermsPage() {
             <section>
               <h2 className="font-['Space_Grotesk'] text-2xl font-bold text-white mb-4">6. Subscription & Payments</h2>
               <div className="space-y-3 text-[var(--text-primary)] font-['Inter'] text-sm">
-                <p>• NebulaTasks offers a Free Tier with basic features</p>
+                <p>• AndroSky offers a Free Tier with basic features</p>
                 <p>• Premium features are unlocked through level progression, not direct payment</p>
                 <p>• Future paid plans (if introduced) will be communicated 30 days in advance</p>
                 <p>• You may cancel your account at any time</p>
@@ -117,7 +117,7 @@ export default function CosmicTermsPage() {
               <h2 className="font-['Space_Grotesk'] text-2xl font-bold text-white mb-4">7. Data & Privacy</h2>
               <p className="text-[var(--text-primary)] font-['Inter'] text-sm">
                 Your privacy is critically important. Our <a href="/privacy" className="text-[var(--accent-cyan)] hover:underline">Starlight Privacy Policy </a> 
-                explains how we collect, use, and protect your data. By using NebulaTasks, you consent to our data practices 
+                explains how we collect, use, and protect your data. By using AndroSky, you consent to our data practices 
                 as described in the Privacy Policy.
               </p>
             </section>
@@ -173,7 +173,7 @@ export default function CosmicTermsPage() {
               <h2 className="font-['Space_Grotesk'] text-2xl font-bold text-white mb-4">12. Contact Information</h2>
               <div className="bg-white/5 p-4 rounded-xl">
                 <p className="text-[var(--text-primary)] font-['Inter'] text-sm">
-                  <strong className="text-white">Legal Entity:</strong> NebulaTasks, Inc.<br/>
+                  <strong className="text-white">Legal Entity:</strong> AndroSky, Inc.<br/>
                   <strong className="text-white">Registered Address:</strong> 548 Market St, PMB 90543, San Francisco, CA 94104<br/>
                   <strong className="text-white">Legal Inquiries:</strong> <a href="mailto:legal@nebulatasks.io" className="text-[var(--accent-cyan)] hover:underline">legal@nebulatasks.io</a><br/>
                   <strong className="text-white">DMCA Agent:</strong> copyright@nebulatasks.io

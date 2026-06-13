@@ -3,7 +3,7 @@ import Footer from '@/component/landing/Footer'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Missions - Turn Tasks into Adventures | NebulaTasks',
+  title: 'Missions - Turn Tasks into Adventures | AndroSky',
   description: 'Transform your daily to-dos into exciting missions. Earn XP, level up, and make productivity feel like a game.',
 }
 

@@ -3,8 +3,8 @@ import Footer from '@/component/landing/Footer'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Starlight Privacy Policy - NebulaTasks',
-  description: 'Your privacy matters. Read how NebulaTasks protects your data with enterprise-grade security and transparency.',
+  title: 'Starlight Privacy Policy - AndroSky',
+  description: 'Your privacy matters. Read how AndroSky protects your data with enterprise-grade security and transparency.',
 }
 
 export default function StarlightPrivacyPage() {
@@ -65,7 +65,7 @@ export default function StarlightPrivacyPage() {
               <div className="grid md:grid-cols-2 gap-4 text-[var(--text-primary)] font-['Inter'] text-sm">
                 <div className="bg-white/5 p-4 rounded-xl">
                   <span className="material-symbols-outlined text-[var(--accent-cyan)] text-sm align-middle mr-1">check_circle</span>
-                  Provide and maintain NebulaTasks
+                  Provide and maintain AndroSky
                 </div>
                 <div className="bg-white/5 p-4 rounded-xl">
                   <span className="material-symbols-outlined text-[var(--accent-cyan)] text-sm align-middle mr-1">check_circle</span>

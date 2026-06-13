@@ -2,7 +2,7 @@ import Navbar from '@/component/landing/Navbar'
 import Footer from '@/component/landing/Footer'
 
 export const metadata = {
-  title: 'Galaxy Map - Your Productivity Journey | NebulaTasks',
+  title: 'Galaxy Map - Your Productivity Journey | AndroSky',
   description: 'Visualize your progress through 20 levels of productivity mastery. From Nova Seed to Galaxy Sovereign.',
 }
 

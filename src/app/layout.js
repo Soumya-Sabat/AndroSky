@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: 'NebulaTasks | Productivity, Written in the Stars',
-  description: 'Transform your daily grind into a cosmic journey.',
+title: 'Androsky | Productivity, Written in the Stars',
+description: 'Transform your daily grind into a celestial journey with Androsky. Gamified task management that lets you soar through your tasks.',
 };
 
 export default function RootLayout({ children }) {

@@ -3,8 +3,8 @@ import Footer from '@/component/landing/Footer'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Academy - Learn Productivity & Gamification | NebulaTasks',
-  description: 'Master productivity techniques, learn gamification strategies, and get the most out of NebulaTasks.',
+  title: 'Academy - Learn Productivity & Gamification | AndroSky',
+  description: 'Master productivity techniques, learn gamification strategies, and get the most out of AndroSky.',
 }
 
 const resources = [
@@ -28,12 +28,12 @@ export default function AcademyPage() {
             <span className="font-['JetBrains_Mono'] text-xs text-[var(--accent-tertiary)] uppercase tracking-[0.2em]">Knowledge Base</span>
           </div>
           <h1 className="font-['Space_Grotesk'] text-4xl md:text-6xl font-bold mb-6 text-white">
-            NebulaTasks{' '}
+            AndroSky{' '}
             <span className="gradient-text">Academy</span>
           </h1>
           <p className="text-[var(--text-variant)] text-lg md:text-xl max-w-2xl mx-auto font-['Inter'] leading-relaxed">
             Master the art of productivity. Learn tips, tricks, and best practices 
-            to get the most out of NebulaTasks.
+            to get the most out of AndroSky.
           </p>
         </div>
 
@@ -70,7 +70,7 @@ export default function AcademyPage() {
             
             <div className="space-y-4">
               {[
-                { q: 'Is NebulaTasks free to use?', a: 'Yes! The free tier includes unlimited personal tasks and basic features. Premium features unlock as you level up.' },
+                { q: 'Is AndroSky free to use?', a: 'Yes! The free tier includes unlimited personal tasks and basic features. Premium features unlock as you level up.' },
                 { q: 'How do clusters work?', a: 'Clusters are private groups with unique 5-character codes. Only people with the code can join your cluster.' },
                 { q: 'Can I switch between Personal and Professional realms?', a: 'Absolutely! One-click toggle lets you separate work and life tasks.' },
                 { q: 'What happens to my data?', a: 'Your data is encrypted and private. We never share or sell your information.' },

@@ -18,7 +18,7 @@ export async function generateMetadata({ params }) {
   if (!post) return { title: 'Post Not Found' }
   
   return {
-    title: `${post.title} | NebulaTasks`,
+    title: `${post.title} | AndroSky`,
     description: post.excerpt,
   }
 }
@@ -99,7 +99,7 @@ export default async function SinglePostPage({ params }) {
             
             <div className="flex items-center gap-2 text-sm text-[var(--text-primary)]">
               <span className="material-symbols-outlined text-sm">person</span>
-              <span>{post.author || 'NebulaTasks Team'}</span>
+              <span>{post.author || 'AndroSky Team'}</span>
             </div>
           </div>
           

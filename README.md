@@ -1,4 +1,4 @@
-# 🌌 NebulaTasks
+# 🌌 AndroSky
 
 ### *"Where every task becomes a cosmic achievement, and productivity meets the stars - collaborate, conquer, and celebrate in the nebula realm."*
 
@@ -6,7 +6,7 @@
 
 ## Project Overview
 
-NebulaTasks is a revolutionary gamified task management platform that transforms mundane productivity into an interstellar journey. Users can manage personal and professional tasks, form collaborative clusters (private groups), earn cosmic rewards, and experience celebration effects - all within a stunning nebula-themed universe.
+AndroSky is a revolutionary gamified task management platform that transforms mundane productivity into an interstellar journey. Users can manage personal and professional tasks, form collaborative clusters (private groups), earn cosmic rewards, and experience celebration effects - all within a stunning nebula-themed universe.
 
 **Take a look:** [Coming Soon]   
 **Status:**  Under Active Development
@@ -175,4 +175,4 @@ nebulatasks/
 ## License
 
 This project is proprietary and confidential.
-© 2026 NebulaTasks. All rights reserved.
+© 2026 AndroSky. All rights reserved.

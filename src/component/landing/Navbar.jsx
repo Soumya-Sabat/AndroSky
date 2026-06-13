@@ -9,7 +9,7 @@ export default function Navbar() {
           <a 
           href="/"
           className="font-['Space_Grotesk'] text-xl md:text-2xl font-bold tracking-tighter text-[#dae2fd]">
-            NebulaTasks
+            AndroSky
           </a>
         </div>
         <div className="hidden md:flex items-center gap-8">

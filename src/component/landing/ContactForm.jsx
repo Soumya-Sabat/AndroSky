@@ -102,7 +102,7 @@ export default function ContactForm() {
               Sending...
             </span>
           ) : (
-            'Send Message ✨'
+            'Send Message '
           )}
         </button>
         

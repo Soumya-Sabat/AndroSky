@@ -1,10 +1,9 @@
 "use client"
 import ContactForm from '@/component/landing/ContactForm';
 
-// SEO metadata
 export const metadata = {
-  title: 'Contact Us - NebulaTasks',
-  description: 'Get in touch with the NebulaTasks team. Send us your questions, feedback, or just say hello!',
+  title: 'Contact Us - AndroSky',
+  description: 'Get in touch with the AndroSky team. Send us your questions, feedback, or just say hello!',
 }
 
 export default function ContactPage() {
@@ -44,7 +43,7 @@ export default function ContactPage() {
             </h1>
             <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto rounded-full mb-6"></div>
             <p className="text-[#c6c6cd] text-lg max-w-2xl mx-auto font-['Inter']">
-              Have questions about NebulaTasks? Want to collaborate? Or just want to say hi? 
+              Have questions about AndroSky? Want to collaborate? Or just want to say hi? 
               Our subspace receivers are always on.
             </p>
           </div>
@@ -52,7 +51,7 @@ export default function ContactPage() {
           <ContactForm />
           
           <div className="text-center mt-12 text-[#909097] text-sm font-['JetBrains_Mono']">
-            <p>I'll get back to you within 24-48 hours. ✨</p>
+            <p>I'll get back to you within 24-48 hours. </p>
           </div>
         </div>
       </main>
