@@ -1,36 +1,178 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🌌 NebulaTasks
 
-## Getting Started
+### *"Where every task becomes a cosmic achievement, and productivity meets the stars - collaborate, conquer, and celebrate in the nebula realm."*
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Project Overview
+
+NebulaTasks is a revolutionary gamified task management platform that transforms mundane productivity into an interstellar journey. Users can manage personal and professional tasks, form collaborative clusters (private groups), earn cosmic rewards, and experience celebration effects - all within a stunning nebula-themed universe.
+
+**Take a look:** [Coming Soon]   
+**Status:**  Under Active Development
+
+---
+
+##  Key Features
+
+###  Passwordless Authentication
+- Email-based login with environmental salt mixing
+- No passwords, no OTP - just your email
+- JWT-based session management (30-day expiry)
+- Secure HTTP-only cookies
+
+###  Dual Reality Registry
+- **Personal Realm:** Individual task management (warm purple/pink tones)
+- **Professional Realm:** Work-focused tasks (cool blue/cyan tones)
+- Seamless toggle with orbiting planets animation
+
+###  Private Clusters (Groups)
+- Create private clusters with unique 5-character alphanumeric codes
+- Join via code only - no public discovery
+- Max 50 members per cluster
+- Real-time presence tracking
+- Collaborative quests and shared tasks
+
+###  Gamification Engine
+- **XP System:** Level up from Nova Seed (L1) to Galaxy Sovereign (L20)
+- **Nebula Coins (₦):** Earn through tasks, redeem for real-life rewards
+- **Achievements:** Constellation badges with unlock conditions
+- **Leaderboards:** Global, Cluster, and Friends rankings
+
+###  Real-Life Rewards
+- Track and redeem coins for real activities:
+  - 500₦ = Coffee Break
+  - 1,000₦ = Episode Night
+  - 2,000₦ = Food Freedom
+  - 5,000₦ = Movie Marathon
+  - 10,000₦ = Experience Day
+
+###  Feature Unlocks
+- Level 1: Basic Tasks & Personal Realm
+- Level 5: Habits Tracker
+- Level 6: Join Clusters
+- Level 10: Advanced Analytics
+- Level 15: Goal Tracking
+- Level 20: Mentor Mode
+
+###  Visual Experience
+- Animated nebula background (Three.js)
+- Glass-morphism card design
+- Celebration poppers on task completion
+- Shooting star effects for cluster achievements
+- Constellation progress visualization
+
+---
+
+##  Architecture
+
+### Technology Stack
+
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| **Frontend** | Next.js 14 (App Router) | React framework with SSR |
+| **Styling** | Tailwind CSS + Framer Motion | Utility-first CSS + animations |
+| **Backend** | Supabase | PostgreSQL + Auth + Realtime |
+| **Database** | PostgreSQL (Supabase) | Primary data store |
+| **Real-time** | Supabase Realtime | WebSocket connections |
+| **Deployment** | Vercel | Edge-optimized hosting |
+| **Monitoring** | Sentry + Logtail | Error tracking + logging |
+
+### Database Schema (PostgreSQL)
+
+```sql
+-- Core tables structure
+users: id, email_hash, username, total_xp, nebula_coins, current_level
+tasks: id, assigned_to, cluster_id, realm_type, title, difficulty, status, xp_reward
+clusters: id, name, unique_code (5-char), created_by, member_count
+cluster_members: cluster_id, user_id, role, contribution_points
+achievements: id, name, requirement_type, reward
+user_achievements: user_id, achievement_id, earned_at
+task_dependencies: task_id, depends_on_task_id
+task_assignees: task_id, user_id, is_completed
+api_keys: id, user_id, key_hash, permissions
+
+```
+## Project Structure
+```code
+
+nebulatasks/
+├── src/
+│   ├── app/
+│   │   ├── layout.jsx              # Root layout with metadata
+│   │   ├── page.jsx                # Landing page (completed)
+│   │   ├── dashboard/
+│   │   │   └── page.jsx            # Main dashboard (WIP)
+│   │   ├── auth/
+│   │   │   ├── login/page.jsx      # Login screen
+│   │   │   └── register/page.jsx   # Registration
+│   │   └── cluster/
+│   │       ├── [id]/page.jsx       # Cluster detail view
+│   │       └── create/page.jsx     # Create cluster flow
+│   ├── components/
+│   │   ├── landing/                # ✅ Completed
+│   │   │   ├── Hero.jsx
+│   │   │   ├── Features.jsx
+│   │   │   ├── HowItWorks.jsx
+│   │   │   ├── Pricing.jsx
+│   │   │   └── Footer.jsx
+│   │   ├── dashboard/              # 🚧 In Progress
+│   │   │   ├── TaskCard.jsx
+│   │   │   ├── RealmToggle.jsx
+│   │   │   ├── ClusterWidget.jsx
+│   │   │   └── RewardsPanel.jsx
+│   │   ├── ui/                     # Reusable components
+│   │   │   ├── Button.jsx
+│   │   │   ├── Modal.jsx
+│   │   │   ├── Celebration.jsx
+│   │   │   └── NebulaBackground.jsx
+│   │   └── cluster/
+│   │       ├── JoinModal.jsx
+│   │       ├── CreateModal.jsx
+│   │       └── MemberList.jsx
+│   ├── lib/
+│   │   ├── supabase.js             # Supabase client config
+│   │   ├── auth.js                 # Passwordless auth logic
+│   │   ├── gamification.js         # XP, levels, rewards
+│   │   └── constants.js            # Game constants
+│   ├── hooks/
+│   │   ├── useAuth.js              # Auth state hook
+│   │   ├── useRealtime.js          # Real-time subscriptions
+│   │   └── useCluster.js           # Cluster operations
+│   ├── utils/
+│   │   ├── helpers.js              # Utility functions
+│   │   └── validation.js           # Input validation
+│   └── styles/
+│       └── globals.css             # Tailwind + custom styles
+├── public/
+│   ├── images/                     # Static assets
+│   └── fonts/                      # Custom fonts (Orbitron, Inter)
+├── supabase/
+│   └── migrations/                 # Database migrations
+├── .env.local                      # Environment variables
+├── tailwind.config.js
+├── next.config.js
+└── package.json
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Entry Flow 
+1. User enters email
+2. System adds SALT from .env to email
+3. Creates SHA-256 hash
+4. Stores { email_hash, email_original } in DB
+5. Returns JWT token (limited time access)
+6. Redirects to dashboard
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Design Inspiration
+ - NASA astronomy pictures for nebula backgrounds
+ -  Destiny 2 UI for orbital elements
+ -   Apple design for glass-morphism
+ -  Habitica for gamification patterns
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is proprietary and confidential.
+© 2026 NebulaTasks. All rights reserved.
