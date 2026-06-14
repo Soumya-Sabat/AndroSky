@@ -7,11 +7,22 @@ export default function NewPost() {
   const router = useRouter();
   const [form, setForm] = useState({ title: '', slug: '', excerpt: '', content: '', category: 'General' });
 
-  const handleSubmit = async (e) => {
+
+const handleSubmit = async (e) => {
     e.preventDefault();
-    const { error } = await supabase.from('posts').insert([form]);
-    if (error) alert("Error: " + error.message);
-    else { alert("Post Published!"); router.push('/adminboard/posts'); }
+    
+    // Add { returning: 'minimal' } to prevent the secondary SELECT check
+    const { error } = await supabase
+      .from('posts')
+      .insert([form], { returning: 'minimal' }); 
+
+    if (error) {
+      console.error("Insert Error Details:", error);
+      alert("Error: " + error.message);
+    } else {
+      alert("Post Published!");
+      router.push('/adminboard/posts');
+    }
   };
 
   return (
