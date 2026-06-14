@@ -24,9 +24,6 @@ export default function AcademyPage() {
       <main className="pt-32 pb-20">
         {/* Hero Section */}
         <div className="text-center px-6 max-w-4xl mx-auto mb-16">
-          <div className="inline-block mb-4 px-4 py-1 rounded-full border border-[var(--accent-tertiary)]/30 bg-[var(--accent-tertiary)]/10 backdrop-blur-sm">
-            <span className="font-['JetBrains_Mono'] text-xs text-[var(--accent-tertiary)] uppercase tracking-[0.2em]">Knowledge Base</span>
-          </div>
           <h1 className="font-['Space_Grotesk'] text-4xl md:text-6xl font-bold mb-6 text-white">
             AndroSky{' '}
             <span className="gradient-text">Academy</span>
@@ -63,33 +60,13 @@ export default function AcademyPage() {
           </div>
         </div>
 
-        {/* FAQ Section */}
-        <div className="bg-[var(--surface-low)]/40 py-20">
-          <div className="px-6 max-w-4xl mx-auto">
-            <h2 className="font-['Space_Grotesk'] text-3xl font-bold text-white text-center mb-12">Frequently Asked Questions</h2>
-            
-            <div className="space-y-4">
-              {[
-                { q: 'Is AndroSky free to use?', a: 'Yes! The free tier includes unlimited personal tasks and basic features. Premium features unlock as you level up.' },
-                { q: 'How do clusters work?', a: 'Clusters are private groups with unique 5-character codes. Only people with the code can join your cluster.' },
-                { q: 'Can I switch between Personal and Professional realms?', a: 'Absolutely! One-click toggle lets you separate work and life tasks.' },
-                { q: 'What happens to my data?', a: 'Your data is encrypted and private. We never share or sell your information.' },
-              ].map((faq) => (
-                <div key={faq.q} className="glass rounded-xl p-5">
-                  <h4 className="font-['Space_Grotesk'] font-semibold text-white mb-2">{faq.q}</h4>
-                  <p className="text-[var(--text-primary)] text-sm font-['Inter']">{faq.a}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
 
         {/* CTA */}
         <div className="px-6 max-w-3xl mx-auto text-center mt-20">
           <div className="glass rounded-3xl p-8">
             <h3 className="font-['Space_Grotesk'] text-2xl font-bold text-white mb-3">Still Have Questions?</h3>
             <p className="text-[var(--text-primary)] mb-6">Our team is ready to help you navigate the cosmos.</p>
-            <Link href="/contact">
+            <Link href="/command-center">
               <button className="button-gradient px-8 py-3 rounded-full text-white font-['Space_Grotesk'] font-bold">
                 Contact Support
               </button>

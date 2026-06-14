@@ -15,9 +15,6 @@ export default function MissionsPage() {
       <main className="pt-32 pb-20">
         {/* Hero Section */}
         <div className="text-center px-6 max-w-4xl mx-auto mb-20">
-          <div className="inline-block mb-4 px-4 py-1 rounded-full border border-[var(--accent-cyan)]/30 bg-[var(--accent-cyan)]/10 backdrop-blur-sm">
-            <span className="font-['JetBrains_Mono'] text-xs text-[var(--accent-cyan)] uppercase tracking-[0.2em]">Gamified Productivity</span>
-          </div>
           <h1 className="font-['Space_Grotesk'] text-4xl md:text-6xl font-bold mb-6 text-white">
             Turn Tasks Into{' '}
             <span className="gradient-text">Epic Missions</span>
@@ -117,9 +114,11 @@ export default function MissionsPage() {
           <div className="glass rounded-3xl p-8 bg-gradient-to-r from-[var(--accent-cyan)]/5 to-[var(--accent-purple)]/5">
             <h3 className="font-['Space_Grotesk'] text-2xl font-bold text-white mb-3">Ready to Start Your Mission?</h3>
             <p className="text-[var(--text-primary)] mb-6">Join thousands of commanders already leveling up their productivity.</p>
-            <button className="button-gradient px-8 py-3 rounded-full text-white font-['Space_Grotesk'] font-bold">
+            <Link 
+            href="/register"
+            className="button-gradient px-8 py-3 rounded-full text-white font-['Space_Grotesk'] font-bold">
               Launch Your Odyssey
-            </button>
+            </Link>
           </div>
         </div>
       </main>
