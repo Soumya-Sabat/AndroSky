@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+@theme {
+  /* Dynamic Side Drawer Slide-Left Animation Mechanics */
+  --animate-slideLeft: slideLeft 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  
+  /* Micro-Interaction Fade-In Sequence */
+  --animate-fadeIn: fadeIn 0.25s ease-out forwards;
+
+  @keyframes slideLeft {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0); }
+  }
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(4px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+}
+
 @layer base {
   :root {
     --bg-primary: #0F172A;
@@ -436,4 +453,242 @@
 
 .animation-delay-8000 {
   animation-delay: 8s;
+}
+
+
+/* Custom scrollbar for sidebar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-cyan);
+}
+
+
+/* ============================================ */
+/* DASHBOARD SPECIFIC ANIMATIONS */
+/* ============================================ */
+
+@keyframes twinkle-slow {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+}
+
+.animate-twinkle-slow {
+  animation: twinkle-slow 6s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-40px) translateX(30px);
+    opacity: 0.6;
+  }
+  75% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0;
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow linear infinite;
+}
+
+/* dashboard page layout  */
+/* ============================================ */
+/* METEOR & ASTEROID ANIMATIONS */
+/* ============================================ */
+
+/* Meteors - Diagonal falling stars */
+@keyframes meteor {
+  0% {
+    transform: translateX(0) translateY(0) rotate(35deg);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-300px) translateY(300px) rotate(35deg);
+    opacity: 0;
+  }
+}
+
+.meteor {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: linear-gradient(135deg, #fff, transparent);
+  border-radius: 50%;
+  animation: meteor 4s linear infinite;
+}
+
+.meteor::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, #fff, transparent);
+  transform: translateX(-100%);
+}
+
+/* Slow meteors */
+@keyframes meteor-slow {
+  0% {
+    transform: translateX(0) translateY(0) rotate(45deg);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-400px) translateY(400px) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+.meteor-slow {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: linear-gradient(135deg, #06B6D4, transparent);
+  border-radius: 50%;
+  animation: meteor-slow 7s linear infinite;
+}
+
+/* Asteroids - Slowly drifting rocks */
+@keyframes asteroid {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translateX(-20px) translateY(30px) rotate(45deg);
+  }
+  50% {
+    transform: translateX(10px) translateY(60px) rotate(90deg);
+    opacity: 0.3;
+  }
+  75% {
+    transform: translateX(-15px) translateY(90px) rotate(135deg);
+  }
+  100% {
+    transform: translateX(0) translateY(120px) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+.asteroid {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #8B5CF6;
+  border-radius: 2px;
+  clip-path: polygon(50% 0%, 80% 30%, 70% 70%, 30% 80%, 0% 50%);
+  animation: asteroid 15s linear infinite;
+  filter: blur(1px);
+}
+
+/* Fast asteroid */
+@keyframes asteroid-fast {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(-100px) translateY(200px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.asteroid-fast {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #EC4899;
+  border-radius: 2px;
+  clip-path: polygon(50% 0%, 80% 30%, 70% 70%, 30% 80%, 0% 50%);
+  animation: asteroid-fast 10s linear infinite;
+}
+
+/* ============================================ */
+/* DASHBOARD METEOR & ASTEROID ANIMATIONS */
+/* ============================================ */
+
+@keyframes meteorFall {
+  0% {
+    transform: translateX(0) translateY(0) rotate(35deg);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-200px) translateY(200px) rotate(35deg);
+    opacity: 0;
+  }
+}
+
+@keyframes asteroidDrift {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 0.7;
+  }
+  25% {
+    transform: translateX(-30px) translateY(40px) rotate(45deg);
+  }
+  50% {
+    transform: translateX(20px) translateY(80px) rotate(90deg);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translateX(-20px) translateY(120px) rotate(135deg);
+  }
+  100% {
+    transform: translateX(0) translateY(160px) rotate(180deg);
+    opacity: 0;
+  }
 }

@@ -1,14 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
 
 export default function DashboardPage() {
-  const [user, setUser] = useState(null);
-  const [clusterName, setClusterName] = useState('');
-  const [feedback, setFeedback] = useState('');
   const router = useRouter();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const session = localStorage.getItem('nebula_session');
@@ -17,83 +15,154 @@ export default function DashboardPage() {
       return;
     }
     
-    const parsedUser = JSON.parse(session);
-    // Security redirect intercept: Banish Admin connections away to their specific command deck
-    if (parsedUser.role === 'admin') {
-      router.push('/adminboard');
-    } else {
-      setUser(parsedUser);
+    try {
+      const userData = JSON.parse(session);
+      setUser(userData);
+    } catch (error) {
+      console.error('Error parsing session:', error);
+      router.push('/login');
     }
+    
+    setLoading(false);
   }, [router]);
 
-  const handleSignOut = () => {
-    localStorage.removeItem('nebula_session');
-    router.push('/login');
-  };
-
-  const handleCreateCluster = async (e) => {
-    e.preventDefault();
-    if (!clusterName.trim()) return;
-
-    try {
-      const generatedCode = 'NT-' + Math.random().toString(36).substring(2, 8).toUpperCase();
-
-      const { data: updatedUser, error } = await supabase
-        .from('users')
-        .update({ role: 'leader' })
-        .eq('id', user.id)
-        .select()
-        .single();
-
-      if (error) throw error;
-
-      setUser(updatedUser);
-      localStorage.setItem('nebula_session', JSON.stringify(updatedUser));
-      setFeedback(`✨ Cluster "${clusterName}" deployed! Code: ${generatedCode}. Clearance upgraded to Leader.`);
-      setClusterName('');
-    } catch (err) {
-      setFeedback(`❌ System Error updating role parameters: ${err.message}`);
-    }
-  };
-
-  if (!user) return null;
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--accent-cyan)]"></div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen p-6 md:p-12 text-white font-['Inter']">
-      <div className="max-w-4xl mx-auto space-y-6">
-        <div className="p-6 rounded-3xl bg-[#131315]/40 border border-white/10 backdrop-blur-md flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div>
-            <span className="text-xs font-['JetBrains_Mono'] text-cyan-400 uppercase tracking-widest block mb-1">
-              Clearance Level {user.current_level} • {user.role}
-            </span>
-            <h1 className="text-2xl font-bold font-['Space_Grotesk']">System Dashboard: {user.name}</h1>
+    <div className="space-y-6">
+      {/* Welcome Header */}
+      <div>
+        <h1 className="font-['Space_Grotesk'] text-2xl md:text-3xl font-bold text-white">
+          Welcome back, <span className="gradient-text">{user?.name || 'Commander'}</span>
+        </h1>
+        <p className="text-[var(--text-primary)] text-sm mt-1">
+          Here's your mission overview
+        </p>
+      </div>
+
+      {/* Stats Row - 4 cards */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="bg-[var(--surface)]/60 rounded-xl p-4 border border-white/10">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-2xl">⭐</span>
+            <span className="text-xs text-[var(--text-primary)]/50">Total</span>
           </div>
-          <button onClick={handleSignOut} className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-xs hover:bg-red-500/20 text-red-300 transition-all">
-            Disconnect Terminal
-          </button>
+          <div className="text-2xl font-bold text-white">{user?.total_xp || 0}</div>
+          <div className="text-xs text-[var(--text-primary)] mt-1">XP Earned</div>
         </div>
 
-        {feedback && (
-          <div className="p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-['JetBrains_Mono']">
-            {feedback}
+        <div className="bg-[var(--surface)]/60 rounded-xl p-4 border border-white/10">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-2xl">💰</span>
+            <span className="text-xs text-[var(--text-primary)]/50">Balance</span>
           </div>
-        )}
+          <div className="text-2xl font-bold text-white">{user?.nebula_coins || 100}</div>
+          <div className="text-xs text-[var(--text-primary)] mt-1">Nebula Coins</div>
+        </div>
 
-        <div className="p-6 rounded-2xl bg-[#131315]/40 border border-white/10 backdrop-blur-md max-w-md">
-          <h3 className="font-['Space_Grotesk'] text-lg font-bold text-purple-400 mb-2">Squadron Deployment</h3>
-          {user.role === 'user' ? (
-            <form onSubmit={handleCreateCluster} className="space-y-3">
-              <p className="text-xs text-gray-400">Deploy your own node. Submitting coordinates upgrades your status parameters to Leader.</p>
-              <div className="flex gap-2">
-                <input type="text" placeholder="Designate Cluster Name" required className="flex-grow p-2.5 bg-white/5 border border-white/10 rounded-xl text-sm text-white" value={clusterName} onChange={e => setClusterName(e.target.value)} />
-                <button type="submit" className="px-4 button-gradient rounded-xl font-bold text-xs uppercase tracking-wide whitespace-nowrap">Build Core</button>
+        <div className="bg-[var(--surface)]/60 rounded-xl p-4 border border-white/10">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-2xl">🏅</span>
+            <span className="text-xs text-[var(--text-primary)]/50">Rank</span>
+          </div>
+          <div className="text-2xl font-bold text-white">Lv.{user?.current_level || 1}</div>
+          <div className="text-xs text-[var(--text-primary)] mt-1">Commander</div>
+        </div>
+
+        <div className="bg-[var(--surface)]/60 rounded-xl p-4 border border-white/10">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-2xl">🔥</span>
+            <span className="text-xs text-[var(--text-primary)]/50">Streak</span>
+          </div>
+          <div className="text-2xl font-bold text-white">{user?.current_streak || 0}</div>
+          <div className="text-xs text-[var(--text-primary)] mt-1">Day Streak</div>
+        </div>
+      </div>
+
+      {/* Level Progress Bar */}
+      <div className="bg-[var(--surface)]/60 rounded-xl p-4 border border-white/10">
+        <div className="flex justify-between text-sm mb-2">
+          <span className="text-[var(--text-primary)]">Level Progress</span>
+          <span className="text-[var(--accent-cyan)] font-['JetBrains_Mono'] text-xs">
+            {Math.round(((user?.total_xp || 0) / 2700) * 100)}%
+          </span>
+        </div>
+        <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+          <div 
+            className="h-full bg-gradient-to-r from-[var(--accent-cyan)] to-[var(--accent-purple)] rounded-full transition-all duration-500"
+            style={{ width: `${Math.min(((user?.total_xp || 0) / 2700) * 100, 100)}%` }}
+          />
+        </div>
+        <div className="flex justify-between text-xs text-[var(--text-primary)]/50 mt-2">
+          <span>Nova Seed</span>
+          <span>Galaxy Sovereign</span>
+        </div>
+      </div>
+
+      {/* Two Column Layout */}
+      <div className="grid lg:grid-cols-2 gap-6">
+        {/* Recent Activity */}
+        <div className="bg-[var(--surface)]/60 rounded-xl border border-white/10 overflow-hidden">
+          <div className="px-5 py-3 border-b border-white/10">
+            <h2 className="font-['Space_Grotesk'] text-base font-bold text-white">Recent Activity</h2>
+          </div>
+          <div className="divide-y divide-white/10">
+            {[
+              { title: 'Completed "Design System"', xp: 25, time: '2 hours ago' },
+              { title: 'Earned "Early Bird" achievement', xp: 50, time: '5 hours ago' },
+              { title: 'Joined "Cosmic Devs" cluster', xp: 10, time: '1 day ago' },
+            ].map((item, i) => (
+              <div key={i} className="px-5 py-3 flex justify-between items-center">
+                <div>
+                  <p className="text-white text-sm">{item.title}</p>
+                  <p className="text-xs text-[var(--text-primary)]/50">{item.time}</p>
+                </div>
+                <span className="text-xs text-[var(--accent-cyan)]">+{item.xp} XP</span>
               </div>
-            </form>
-          ) : (
-            <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs text-purple-300">
-              🚀 <strong>Leader Capabilities Confirmed:</strong> You have active squadron privileges.
-            </div>
-          )}
+            ))}
+          </div>
+        </div>
+
+        {/* Pending Tasks */}
+        <div className="bg-[var(--surface)]/60 rounded-xl border border-white/10 overflow-hidden">
+          <div className="px-5 py-3 border-b border-white/10">
+            <h2 className="font-['Space_Grotesk'] text-base font-bold text-white">Pending Tasks</h2>
+          </div>
+          <div className="divide-y divide-white/10">
+            {[
+              { title: 'Complete project documentation', priority: 'High', due: 'Today' },
+              { title: 'Review pull requests', priority: 'Medium', due: 'Tomorrow' },
+              { title: 'Update user profile', priority: 'Low', due: 'This week' },
+            ].map((task, i) => (
+              <div key={i} className="px-5 py-3 flex justify-between items-center">
+                <div className="flex-1">
+                  <p className="text-white text-sm">{task.title}</p>
+                  <div className="flex gap-2 mt-1">
+                    <span className={`text-[10px] px-2 py-0.5 rounded-full ${
+                      task.priority === 'High' ? 'bg-red-500/20 text-red-400' :
+                      task.priority === 'Medium' ? 'bg-yellow-500/20 text-yellow-400' :
+                      'bg-green-500/20 text-green-400'
+                    }`}>{task.priority}</span>
+                    <span className="text-[10px] text-[var(--text-primary)]/50">Due: {task.due}</span>
+                  </div>
+                </div>
+                <button className="w-6 h-6 rounded-full border border-white/20 flex items-center justify-center hover:bg-[var(--accent-cyan)]/20 transition">
+                  <span className="material-symbols-outlined text-xs">check</span>
+                </button>
+              </div>
+            ))}
+          </div>
+          <div className="px-5 py-2 border-t border-white/10 bg-white/5">
+            <button className="text-xs text-[var(--accent-cyan)] hover:text-[var(--accent-purple)] transition">
+              + Add New Task
+            </button>
+          </div>
         </div>
       </div>
     </div>
