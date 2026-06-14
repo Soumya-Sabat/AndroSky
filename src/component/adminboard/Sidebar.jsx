@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 const menuItems = [
   { name: 'Dashboard', path: '/adminboard' },
@@ -16,7 +16,13 @@ const menuItems = [
 export default function AdminSidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-
+  const router = useRouter();
+  
+  const handleLogout = () => {
+    localStorage.removeItem('nebula_session');
+    router.push('/');
+  };
+  
   return (
     <>
       {/* Mobile Toggle Button */}
@@ -51,9 +57,15 @@ export default function AdminSidebar() {
         </nav>
 
         <div className="absolute bottom-8 w-full px-8">
-          <Link href="/dashboard" className="text-[10px] text-gray-600 hover:text-white transition uppercase tracking-widest">
-            ← Return to User View
-          </Link>
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-500/10 transition-all duration-200 group"
+          >
+            <span className="text-xl">🚪</span>
+            <span className="font-['Inter'] text-sm text-gray-400 group-hover:text-red-400">
+              Exit Command Center
+            </span>
+          </button>
         </div>
       </aside>
 
