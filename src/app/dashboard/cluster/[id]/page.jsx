@@ -28,6 +28,9 @@ export default function WorkspaceClusterNode() {
   const [taskPriority, setTaskPriority] = useState(3);
   const [tagInputValue, setTagInputValue] = useState('');
 
+  // Administrative Authority Flag Checklist
+  const isGroupCreator = user && currentCluster && user.id === currentCluster.creator_id;
+
   const triggerFeedback = (type, text) => {
     setFeedback({ type, text });
     setTimeout(() => setFeedback({ type: '', text: '' }), 5000);
@@ -174,6 +177,84 @@ export default function WorkspaceClusterNode() {
     }
   };
 
+  // 🛠️ ADMIN ROUTINE: Delete individual task node
+  const handleDeleteTask = async (taskId, taskTitle) => {
+    if (!isGroupCreator) return triggerFeedback('error', 'Unauthorized: Admin privileges required.');
+    if (!confirm(`Are you sure you want to permanently delete task "${taskTitle}"?`)) return;
+
+    try {
+      const { error } = await supabase.from('tasks').delete().eq('id', taskId);
+      if (error) throw error;
+
+      await appendAuditTrail('TASK_DELETE', `Deleted and purged objective [${taskTitle}] from the workspace grid.`);
+      await synchronizeSectorData();
+      triggerFeedback('success', 'Task removed successfully.');
+    } catch (err) {
+      triggerFeedback('error', err.message);
+    }
+  };
+
+  // 🥾 ADMIN ROUTINE: Kick a member out of the group cluster matrix
+  const handleKickMember = async (targetUserId, targetName) => {
+  if (!isGroupCreator) return triggerFeedback('error', 'Unauthorized: Admin privileges required.');
+  if (targetUserId === user.id) return triggerFeedback('error', 'Action fault: You cannot evict yourself.');
+  if (!confirm(`Are you sure you want to remove ${targetName} from this cluster sector?`)) return;
+
+  try {
+    // 1. Break the user's active connection pointer link first
+    const { error: userUpdateError } = await supabase
+      .from('users')
+      .update({ current_cluster_id: null })
+      .eq('id', targetUserId);
+
+    if (userUpdateError) throw userUpdateError;
+
+    // 2. Permanently delete their row from the membership junction ledger
+    const { error: membershipError } = await supabase
+      .from('cluster_memberships')
+      .delete()
+      .eq('cluster_id', clusterId)
+      .eq('user_id', targetUserId);
+
+    if (membershipError) throw membershipError;
+
+    // 3. Write the eviction history event to the shared cluster activity audit trail
+    await appendAuditTrail('MEMBER_EVICT', `Evicted unit profile [${targetName}] from this cluster node sector.`);
+    
+    // 4. Re-fetch fresh grid rows from the database to synchronize the view state structure
+    await synchronizeSectorData();
+    
+    // 5. Present the success confirmation feedback alert box ONLY after successful backend operations
+    triggerFeedback('success', `${targetName} has been evicted from this sector.`);
+    
+  } catch (err) {
+    console.error("Eviction Pipeline Fault:", err);
+    triggerFeedback('error', `Eviction Fault: ${err.message}`);
+  }
+};
+
+  // ⚠️ ADMIN ROUTINE: Erase and wipe the entire Cluster completely
+  const handleDissolveCluster = async () => {
+    if (!isGroupCreator) return triggerFeedback('error', 'Unauthorized: Admin privileges required.');
+    if (!confirm(`⚠️ CRITICAL WARNING: Dissolving will permanently wipe this cluster, all associated task registers, and logs. This cannot be undone. Proceed?`)) return;
+
+    setActionLoading(true);
+    try {
+      const { error } = await supabase.from('clusters').delete().eq('id', clusterId);
+      if (error) throw error;
+
+      // Clean out local state references safely
+      const updatedUserObj = { ...user, current_cluster_id: null };
+      localStorage.setItem('nebula_session', JSON.stringify(updatedUserObj));
+
+      triggerFeedback('success', 'Cluster sector successfully dissolved.');
+      router.push('/dashboard/cluster');
+    } catch (err) {
+      triggerFeedback('error', err.message);
+      setActionLoading(false);
+    }
+  };
+
   if (loading) return <div className="p-8 text-center text-xs font-mono text-cyan-400 animate-pulse">CONNECTING INTERFACE TO NODE DECK TELEMETRY MATRIX...</div>;
 
   return (
@@ -207,9 +288,22 @@ export default function WorkspaceClusterNode() {
           <p className="text-xs text-gray-400 mt-0.5">{currentCluster?.description || 'No direct summaries documented.'}</p>
         </div>
         
-        <div className="bg-black/30 px-5 py-2.5 rounded-xl border border-white/5 text-center min-w-[120px]">
-          <span className="text-[9px] font-mono text-gray-500 block uppercase font-bold tracking-wider">Access Sync Key</span>
-          <span className="text-base font-mono font-bold tracking-widest text-cyan-400">{currentCluster?.access_code}</span>
+        <div className="flex flex-col items-end gap-2 shrink-0 w-full md:w-auto">
+          <div className="bg-black/30 px-5 py-2.5 rounded-xl border border-white/5 text-center min-w-[120px] w-full md:w-auto">
+            <span className="text-[9px] font-mono text-gray-500 block uppercase font-bold tracking-wider">Access Sync Key</span>
+            <span className="text-base font-mono font-bold tracking-widest text-cyan-400">{currentCluster?.access_code}</span>
+          </div>
+          
+          {/* Creator Cluster Purging Trigger button */}
+          {isGroupCreator && (
+            <button 
+              onClick={handleDissolveCluster}
+              disabled={actionLoading}
+              className="w-full md:w-auto text-[9px] font-mono font-bold tracking-wider uppercase text-red-400 hover:text-red-300 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 px-3 py-1.5 rounded-lg transition-all"
+            >
+              {actionLoading ? 'DISSOLVING SECTOR...' : '⚠️ Dissolve Cluster Node'}
+            </button>
+          )}
         </div>
       </div>
 
@@ -278,9 +372,21 @@ export default function WorkspaceClusterNode() {
                         <h4 className={`text-sm font-bold tracking-tight ${task.status === 'completed' ? 'line-through text-gray-500' : 'text-gray-200'}`}>{task.title}</h4>
                         <p className="text-xs text-gray-400 line-clamp-2">{task.description || 'No descriptive logs summarized.'}</p>
                       </div>
-                      <button onClick={() => toggleTaskResolution(task.id, task.status, task.title)} className={`p-1.5 rounded-lg border text-[10px] font-mono transition-colors shrink-0 ${task.status === 'completed' ? 'border-green-500/30 text-green-400 bg-green-500/10' : 'border-white/10 text-gray-400 hover:text-white'}`}>
-                        {task.status === 'completed' ? '✓ RESOLVED' : '◯ CLOSE'}
-                      </button>
+                      <div className="flex flex-col items-end gap-1.5 shrink-0">
+                        <button onClick={() => toggleTaskResolution(task.id, task.status, task.title)} className={`p-1.5 rounded-lg border text-[10px] font-mono transition-colors ${task.status === 'completed' ? 'border-green-500/30 text-green-400 bg-green-500/10' : 'border-white/10 text-gray-400 hover:text-white'}`}>
+                          {task.status === 'completed' ? '✓ RESOLVED' : '◯ CLOSE'}
+                        </button>
+                        
+                        {/* Admin Controlled Task Drop Trigger */}
+                        {isGroupCreator && (
+                          <button 
+                            onClick={() => handleDeleteTask(task.id, task.title)}
+                            className="text-[9px] font-mono px-2 py-0.5 rounded bg-red-500/5 hover:bg-red-500/20 text-red-400 border border-red-500/10 hover:border-red-500/30 transition-all font-semibold"
+                          >
+                            ✕ Purge Task
+                          </button>
+                        )}
+                      </div>
                     </div>
 
                     <div className="mt-4 pt-3 border-t border-white/5 flex flex-wrap gap-1 items-center">
@@ -316,7 +422,7 @@ export default function WorkspaceClusterNode() {
               clusterLogs.map((log) => (
                 <div key={log.id} className="pt-2.5 flex flex-col sm:flex-row sm:justify-between items-start gap-1">
                   <div className="space-y-0.5">
-                    <span className={`text-[9px] font-bold uppercase px-1.5 py-0.2 rounded mr-2 ${log.action_type === 'TASK_CREATE' ? 'bg-cyan-500/10 text-cyan-400' : log.action_type === 'MEMBER_JOIN' ? 'bg-purple-500/10 text-purple-400' : 'bg-amber-500/10 text-amber-400'}`}>
+                    <span className={`text-[9px] font-bold uppercase px-1.5 py-0.2 rounded mr-2 ${log.action_type === 'TASK_CREATE' ? 'bg-cyan-500/10 text-cyan-400' : log.action_type === 'MEMBER_JOIN' ? 'bg-purple-500/10 text-purple-400' : log.action_type === 'TASK_DELETE' ? 'bg-red-500/10 text-red-400' : 'bg-amber-500/10 text-amber-400'}`}>
                       [{log.action_type}]
                     </span>
                     <span className="text-gray-300">{log.description}</span>
@@ -339,12 +445,27 @@ export default function WorkspaceClusterNode() {
             {clusterMembers.map((member) => (
               <div key={member.id} className="p-3 bg-black/20 border border-white/5 rounded-xl flex justify-between items-center text-xs">
                 <div>
-                  <p className="font-bold text-gray-200">{member.name || member.email.split('@')[0]} {member.id === user?.id && <span className="text-[10px] text-cyan-400 font-mono font-bold">(You)</span>}</p>
+                  <p className="font-bold text-gray-200">
+                    {member.name || member.email.split('@')[0]} {member.id === user?.id && <span className="text-[10px] text-cyan-400 font-mono font-bold">(You)</span>}
+                    {member.id === currentCluster?.creator_id && <span className="text-[9px] text-amber-400 font-mono font-bold bg-amber-500/10 border border-amber-500/20 px-1.5 py-0.2 rounded ml-1.5 uppercase tracking-wide">👑 Founder</span>}
+                  </p>
                   <p className="text-[10px] text-gray-500 font-mono mt-0.5">{member.email}</p>
                 </div>
-                <div className="text-right font-mono shrink-0">
-                  <p className="text-purple-400 font-bold">{member.total_xp || 0} XP</p>
-                  <p className="text-[9px] text-gray-600 font-bold">LVL {member.current_level || 1}</p>
+                <div className="text-right font-mono shrink-0 flex items-center gap-4">
+                  <div>
+                    <p className="text-purple-400 font-bold">{member.total_xp || 0} XP</p>
+                    <p className="text-[9px] text-gray-600 font-bold">LVL {member.current_level || 1}</p>
+                  </div>
+
+                  {/* Admin Controlled Member Eviction Trigger */}
+                  {isGroupCreator && member.id !== user?.id && (
+                    <button
+                      onClick={() => handleKickMember(member.id, member.name || member.email.split('@')[0])}
+                      className="p-1.5 rounded-lg text-red-400 hover:text-red-300 bg-red-500/5 hover:bg-red-500/10 border border-red-500/10 hover:border-red-500/20 text-[10px] uppercase font-bold tracking-wide transition-all"
+                    >
+                      🥾 Evict
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
