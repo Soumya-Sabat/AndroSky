@@ -56,9 +56,16 @@ export default function LoginPage() {
 
       // Keep tracking session data locally
       localStorage.setItem('nebula_session', JSON.stringify(user));
-      setStatus({ type: 'success', text: 'Uplink Established. Synchronizing dashboard UI matrix...' });
+      setStatus({ type: 'success', text: 'Uplink Established. Routing permissions matrix...' });
 
-      setTimeout(() => router.push('/dashboard'), 600);
+      // Dynamic Role Routing Engine
+      setTimeout(() => {
+        if (user.role === 'admin') {
+          router.push('/adminboard');
+        } else {
+          router.push('/dashboard');
+        }
+      }, 600);
 
     } catch (err) {
       setStatus({ type: 'error', text: err.message || 'Authentication sequence failed.' });
