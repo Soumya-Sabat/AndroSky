@@ -182,6 +182,9 @@ export default function LoginPage() {
           <Link href="/register" className="text-purple-400 hover:text-purple-300 font-medium hover:underline ml-1">
             Launch Odyssey
           </Link>
+          <Link href="/" className="text-purple-400 hover:text-purple-300 font-medium hover:underline ml-1">
+            Back to Spaceship
+          </Link>
         </p>
       </div>
     </div>

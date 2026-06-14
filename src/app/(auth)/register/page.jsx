@@ -223,6 +223,9 @@ export default function RegisterPage() {
           <Link href="/login" className="text-cyan-400 hover:text-cyan-300 font-medium hover:underline ml-1">
             Access Login
           </Link>
+          <Link href="/" className="text-cyan-400 hover:text-cyan-300 font-medium hover:underline ml-1">
+            Back to Spaceship
+          </Link>
         </p>
       </div>
     </div>
