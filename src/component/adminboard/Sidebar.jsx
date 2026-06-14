@@ -27,7 +27,7 @@ export default function AdminSidebar() {
     <>
       {/* Mobile Toggle Button */}
       <button 
-        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-purple-900 rounded-lg text-white"
+        className="md:hidden sticky top-4 left-4 z-50 p-2 bg-purple-900 rounded-lg text-white"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? '✕' : '☰'}
