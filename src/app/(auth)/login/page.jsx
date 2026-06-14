@@ -179,13 +179,16 @@ export default function LoginPage() {
 
         <p className="text-center text-xs text-[#c6c6cd] mt-6">
           New to this corner of space? 
-          <Link href="/register" className="text-purple-400 hover:text-purple-300 font-medium hover:underline ml-1">
-            Launch Odyssey
-          </Link>
-          <Link href="/" className="text-purple-400 hover:text-purple-300 font-medium hover:underline ml-1">
-            Back to Spaceship
-          </Link>
         </p>
+
+        <div className='justify-center flex flex-row gap-12'>
+          <Link href="/" className="text-purple-400 hover:text-purple-300 font-medium  ml-1">
+           🛸 Back to Spaceship
+          </Link>
+          <Link href="/register" className="text-purple-400 hover:text-purple-300 font-medium hoverml-1">
+            Launch Odyssey 🚀
+          </Link>
+        </div>
       </div>
     </div>
   );

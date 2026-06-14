@@ -220,13 +220,16 @@ export default function RegisterPage() {
 
         <p className="text-center text-xs text-[#c6c6cd] mt-6">
           Already mapped to the system grid? 
-          <Link href="/login" className="text-cyan-400 hover:text-cyan-300 font-medium hover:underline ml-1">
-            Access Login
-          </Link>
-          <Link href="/" className="text-cyan-400 hover:text-cyan-300 font-medium hover:underline ml-1">
-            Back to Spaceship
-          </Link>
         </p>
+
+        <div className='justify-center flex flex-row gap-12'>
+          <Link href="/login" className="text-purple-400 hover:text-purple-300 font-medium  ml-1">
+            🚀Access Terminal 
+          </Link>
+          <Link href="/" className="text-purple-400 hover:text-purple-300 font-medium  ml-1">
+             Back to Spaceship 🛸
+          </Link>
+        </div>
       </div>
     </div>
   );
