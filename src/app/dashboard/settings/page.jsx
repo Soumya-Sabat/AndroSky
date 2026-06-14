@@ -83,20 +83,20 @@ export default function SettingsPage() {
       <form onSubmit={handleUpdate} className="bg-[#131315]/60 border border-white/10 rounded-2xl p-8 space-y-6">
         
         {/* Read-Only Identity Section */}
-        <div className="grid gap-4">
+        <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-[10px] font-mono text-gray-500 uppercase mb-2">System Email</label>
             <input disabled value={formData.email} className="w-full bg-black/20 border border-white/5 rounded-lg p-3 text-s text-cyan-500 cursor-not-allowed" />
           </div>
-          {/* <div>
+          <div>
             <label className="block text-[10px] font-mono text-gray-500 uppercase mb-2">Phone Number</label>
             <input 
               disabled
-              value={formData.phone_number} 
+              value={formData.phone} 
               
               className="w-full bg-black/40 border border-white/10 rounded-lg p-3 text-sm focus:border-purple-500 outline-none transition" 
             />
-          </div> */}
+          </div>
         </div>
 
         {/* Editable Section */}
