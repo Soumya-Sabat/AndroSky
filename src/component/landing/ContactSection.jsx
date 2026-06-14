@@ -8,14 +8,14 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#0F172A] text-white">
+    <div className="min-h-screen flex flex-col text-white">
       {/* Main Content Area */}
       <main className="flex-grow relative pt-32 pb-20 overflow-hidden">
         
         {/* Animated Nebula Background Particles */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* <div className="absolute inset-0 z-0 pointer-events-none">
           <div className="absolute -top-40 -right-40 w-96 h-96 bg-purple-500 rounded-full filter blur-[128px] opacity-10 animate-pulse"></div>
-          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-cyan-500 rounded-full filter blur-[128px] opacity-10 animate-pulse animation-delay-1000"></div>
+          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-cyan-500 rounded-full filter blur-[128px] opacity-10 animate-pulse animation-delay-2000"></div>
           
           <div className="absolute inset-0">
             {[...Array(30)].map((_, i) => (
@@ -33,13 +33,13 @@ export default function ContactPage() {
               />
             ))}
           </div>
-        </div>
+        </div> */}
         
         {/* Page Content */}
         <div className="relative z-10 container mx-auto px-6">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 font-['Space_Grotesk'] text-white">
-              Establish Comm Link
+              Establish Communication Link
             </h1>
             <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto rounded-full mb-6"></div>
             <p className="text-[#c6c6cd] text-lg max-w-2xl mx-auto font-['Inter']">

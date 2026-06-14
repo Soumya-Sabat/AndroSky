@@ -67,7 +67,7 @@ export default async function SinglePostPage({ params }) {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)]">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
       
       <main className="pt-32 pb-20 px-6">

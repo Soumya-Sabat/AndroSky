@@ -38,7 +38,7 @@ export default async function TransmissionHubPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)]">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
       
       <main className="pt-32 pb-20 px-6">
@@ -61,9 +61,9 @@ export default async function TransmissionHubPage() {
             <span className="material-symbols-outlined text-2xl text-[var(--accent-cyan)]">mail</span>
             <h3 className="font-['Space_Grotesk'] text-lg font-bold text-white mt-2">Subscribe to Updates</h3>
             <p className="text-sm text-[var(--text-primary)] mb-4">Get the latest transmissions delivered to your inbox.</p>
-            <div className="flex max-w-md mx-auto gap-3">
+            <div className="flex flex-col max-w-md mx-auto gap-3">
               <input type="email" placeholder="your@email.com" className="flex-1 px-4 py-2 bg-[var(--surface-low)] border border-[var(--surface-variant)] rounded-lg text-white placeholder:text-[var(--text-primary)]/50 focus:outline-none focus:border-[var(--accent-cyan)]" />
-              <button className="button-gradient px-4 py-2 rounded-lg text-white text-sm">Subscribe</button>
+              <button className="button-gradient px-4 py-2 rounded-lg text-white text-sm ">Subscribe</button>
             </div>
           </div>
 

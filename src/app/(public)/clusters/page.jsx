@@ -9,15 +9,12 @@ export const metadata = {
 
 export default function ClustersPage() {
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)]">
+    <div className="min-h-screen flex flex-col ">
       <Navbar />
       
       <main className="pt-32 pb-20">
         {/* Hero Section */}
         <div className="text-center px-6 max-w-4xl mx-auto mb-20">
-          <div className="inline-block mb-4 px-4 py-1 rounded-full border border-[var(--accent-purple)]/30 bg-[var(--accent-purple)]/10 backdrop-blur-sm">
-            <span className="font-['JetBrains_Mono'] text-xs text-[var(--accent-purple)] uppercase tracking-[0.2em]">Team Collaboration</span>
-          </div>
           <h1 className="font-['Space_Grotesk'] text-4xl md:text-6xl font-bold mb-6 text-white">
             Work Together in{' '}
             <span className="gradient-text">Private Clusters</span>

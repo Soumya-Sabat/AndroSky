@@ -37,25 +37,12 @@ export default function HeroSection() {
   }, [tags.length]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[#0F172A]/75 z-10"></div>
-        {/* Always matching background theme space texture */}
-        <img 
-          alt="Cosmic productivity background" 
-          className="w-full h-full object-cover" 
-          src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1920&q=80"
-        />
-        <div className="star-streak w-64 top-1/4 left-1/4" style={{ animationDelay: '0s' }}></div>
-        <div className="star-streak w-48 top-1/2 left-1/3" style={{ animationDelay: '1.5s' }}></div>
-        <div className="star-streak w-80 top-1/3 right-1/4" style={{ animationDelay: '0.8s' }}></div>
-      </div>
-
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="relative z-20 text-center px-6 max-w-4xl mx-auto">
         {/* Dynamic Rotating Tag */}
         <div className="inline-block mb-6 px-4 py-1 rounded-full border border-b border-[#bec6e0]/30 bg-[#bec6e0]/10 backdrop-blur-sm h-[30px]">
           <span 
-            className={`font-['JetBrains_Mono'] text-xs text-[#bec6e0] uppercase tracking-[0.2em] inline-block transition-all duration-300 ${
+            className={`font-['JetBrains_Mono'] text-s text-amber-300 uppercase tracking-[0.2em] inline-block transition-all duration-300 ${
               isFade ? 'opacity-0 transform translate-y-1' : 'opacity-100 transform translate-y-0'
             }`}
           >

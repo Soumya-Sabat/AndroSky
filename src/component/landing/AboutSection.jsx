@@ -1,6 +1,6 @@
 export default function AboutSection() {
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto relative">
+    <section className="py-10 px-6 max-w-7xl mx-auto relative">
       <div className="text-center mb-16">
         <h2 className="font-['Space_Grotesk'] text-3xl font-bold mb-4 text-white">A New Dimension of Work</h2>
         <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto rounded-full"></div>
