@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 const menuItems = [
   { name: 'Dashboard', icon: '📊', href: '/dashboard', color: 'cyan' },
   { name: 'Tasks', icon: '✅', href: '/dashboard/tasks', color: 'cyan' },
-  { name: 'Clusters', icon: '👥', href: '/dashboard/clusters', color: 'purple' },
+  { name: 'Clusters', icon: '👥', href: '/dashboard/cluster', color: 'purple' },
   { name: 'Achievements', icon: '🏆', href: '/dashboard/achievements', color: 'yellow' },
   { name: 'Leaderboard', icon: '📈', href: '/dashboard/leaderboard', color: 'cyan' },
   { name: 'Rewards', icon: '🎁', href: '/dashboard/rewards', color: 'purple' },
