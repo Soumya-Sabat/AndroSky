@@ -88,7 +88,7 @@ export default function MissionsPage() {
         </div>
 
         {/* XP Table Preview */}
-        <div className="px-6 max-w-4xl mx-auto mb-20">
+        {/* <div className="px-6 max-w-4xl mx-auto mb-20">
           <h2 className="font-['Space_Grotesk'] text-2xl font-bold text-white text-center mb-8">Mission Rewards</h2>
           <div className="glass rounded-2xl overflow-hidden">
             <table className="w-full">
@@ -107,7 +107,7 @@ export default function MissionsPage() {
               </tbody>
             </table>
           </div>
-        </div>
+        </div> */}
 
         {/* CTA */}
         <div className="px-6 max-w-3xl mx-auto text-center">
