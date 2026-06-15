@@ -177,18 +177,29 @@ export default function LoginPage() {
           </div>
         )}
 
-        <p className="text-center text-xs text-[#c6c6cd] mt-6">
-          New to this corner of space? 
+        <div className="mt-6 text-center">
+        <p className="text-sm text-[#c6c6cd]">
+          New to this corner of space?
         </p>
 
-        <div className='justify-center flex flex-row gap-12'>
-          <Link href="/" className="text-purple-400 hover:text-purple-300 font-medium  ml-1">
-           🛸 Back to AndroSky
+        <div className="mt-3 flex items-center justify-center gap-6">
+          <Link
+            href="/"
+            className="text-sm font-medium text-gray-400 hover:text-gray-200 transition-colors"
+          >
+            🛸 Back to AndroSky
           </Link>
-          <Link href="/register" className="text-purple-400 hover:text-purple-300 font-medium hoverml-1">
+
+          <span className="text-white/20">|</span>
+
+          <Link
+            href="/register"
+            className="text-sm font-semibold text-purple-400 hover:text-purple-300 transition-colors"
+          >
             Launch Odyssey 🚀
           </Link>
         </div>
+      </div>
       </div>
     </div>
   );
