@@ -181,10 +181,10 @@ export default function StarlightPrivacyPage() {
               </h2>
               <div className="bg-white/5 p-4 rounded-xl">
                 <p className="text-[var(--text-primary)] font-['Inter'] text-sm">
-                  <strong className="text-white">Data Protection Officer:</strong> Sarah Chen<br/>
-                  <strong className="text-white">Email:</strong> <a href="mailto:dpo@nebulatasks.io" className="text-[var(--accent-cyan)] hover:underline">dpo@nebulatasks.io</a><br/>
-                  <strong className="text-white">Address:</strong> 42 Nebula Way, San Francisco, CA 94105<br/>
-                  <strong className="text-white">EU Representative:</strong> GDPR-Rep GmbH, Berlin, Germany
+                  <strong className="text-white">Data Protection Officer:</strong> TBA <br/>
+                  <strong className="text-white">Email:</strong> <a href="mailto:bankingtestacc1@gmail.com" className="text-[var(--accent-cyan)] hover:underline">Click to mail</a><br/>
+                  <strong className="text-white">Address:</strong> XXX <br/>
+                  <strong className="text-white">EU Representative:</strong> N/A
                 </p>
               </div>
             </section>
