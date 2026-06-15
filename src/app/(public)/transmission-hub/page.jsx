@@ -63,7 +63,9 @@ export default async function TransmissionHubPage() {
             <p className="text-sm text-[var(--text-primary)] mb-4">Get the latest transmissions delivered to your inbox.</p>
             <div className="flex flex-col max-w-md mx-auto gap-3">
               <input type="email" placeholder="your@email.com" className="flex-1 px-4 py-2 bg-[var(--surface-low)] border border-[var(--surface-variant)] rounded-lg text-white placeholder:text-[var(--text-primary)]/50 focus:outline-none focus:border-[var(--accent-cyan)]" />
-              <button className="button-gradient px-4 py-2 rounded-lg text-white text-sm ">Subscribe</button>
+              <button  
+              className="button-gradient px-4 py-2 rounded-lg text-white text-sm ">Subscribe</button>
+              <span className='text-center text-green-100'> This feature is currently under development </span>
             </div>
           </div>
 
