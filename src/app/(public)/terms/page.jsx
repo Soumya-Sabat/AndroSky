@@ -174,16 +174,16 @@ export default function CosmicTermsPage() {
               <div className="bg-white/5 p-4 rounded-xl">
                 <p className="text-[var(--text-primary)] font-['Inter'] text-sm">
                   <strong className="text-white">Legal Entity:</strong> AndroSky, Inc.<br/>
-                  <strong className="text-white">Registered Address:</strong> 548 Market St, PMB 90543, San Francisco, CA 94104<br/>
-                  <strong className="text-white">Legal Inquiries:</strong> <a href="mailto:legal@nebulatasks.io" className="text-[var(--accent-cyan)] hover:underline">legal@nebulatasks.io</a><br/>
-                  <strong className="text-white">DMCA Agent:</strong> copyright@nebulatasks.io
+                  <strong className="text-white">Registered Address:</strong> XXX <br/>
+                  <strong className="text-white">Legal Inquiries:</strong> <a href="mailto:bankingtestacc1@gmail.com" className="text-[var(--accent-cyan)] hover:underline">Click to mail</a><br/>
+                  {/* <strong className="text-white">DMCA Agent:</strong> copyright@nebulatasks.io */}
                 </p>
               </div>
             </section>
 
             <div className="border-t border-white/10 pt-6 mt-6 text-center">
               <p className="text-xs text-[var(--text-primary)]/60 font-['JetBrains_Mono']">
-                Version 1.2 | Last Updated: January 2024 | <a href="#" className="hover:text-[var(--accent-cyan)]">Archive of Previous Terms</a>
+                Version 1.2 | Last Updated: June 2026 | <a href="#" className="hover:text-[var(--accent-cyan)]">Archive of Previous Terms</a>
               </p>
             </div>
           </div>
