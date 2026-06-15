@@ -11,6 +11,7 @@ const menuItems = [
   { name: 'Analytics', path: '/adminboard/analytics' },
   { name: 'System Logs', path: '/adminboard/logs' },
   { name: 'Messages', path: '/adminboard/messages' },
+  { name: 'Academic Docs', path: '/adminboard/docs' },
 ];
 
 export default function AdminSidebar() {
