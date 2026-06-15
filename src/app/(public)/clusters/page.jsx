@@ -130,9 +130,9 @@ export default function ClustersPage() {
             <h3 className="font-['Space_Grotesk'] text-2xl font-bold text-white mb-3">Ready to Collaborate?</h3>
             <p className="text-[var(--text-primary)] mb-6">Create your first cluster and invite your team.</p>
             <Link 
-            href="/#"
+            href="/login"
             className="button-gradient px-8 py-3 rounded-full text-white font-['Space_Grotesk'] font-bold">
-              Start a Cluster
+              Start or Join a Cluster
             </Link>
           </div>
         </div>
