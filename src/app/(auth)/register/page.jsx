@@ -227,7 +227,7 @@ export default function RegisterPage() {
             🚀Access Terminal 
           </Link>
           <Link href="/" className="text-purple-400 hover:text-purple-300 font-medium  ml-1">
-             Back to Spaceship 🛸
+             Back to AndroSky 🛸
           </Link>
         </div>
       </div>

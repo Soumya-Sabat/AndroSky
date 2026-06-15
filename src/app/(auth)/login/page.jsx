@@ -183,7 +183,7 @@ export default function LoginPage() {
 
         <div className='justify-center flex flex-row gap-12'>
           <Link href="/" className="text-purple-400 hover:text-purple-300 font-medium  ml-1">
-           🛸 Back to Spaceship
+           🛸 Back to AndroSky
           </Link>
           <Link href="/register" className="text-purple-400 hover:text-purple-300 font-medium hoverml-1">
             Launch Odyssey 🚀
