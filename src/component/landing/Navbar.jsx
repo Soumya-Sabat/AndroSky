@@ -9,7 +9,7 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-[#131315]/80 backdrop-blur-md border-b border-white/10 shadow-[0_0_20px_rgba(190,198,224,0.05)]">
+    <header className="fixed top-0 w-full z-50 bg-[#131315]/50 backdrop-blur-md border-b border-white/10 shadow-[0_0_20px_rgba(190,198,224,0.05)]">
       <nav className="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto relative">
         
         {/* Left Side: Brand Identity */}
