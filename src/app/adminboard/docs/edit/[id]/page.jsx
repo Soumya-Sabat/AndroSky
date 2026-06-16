@@ -8,7 +8,7 @@ export default function EditDocPage() {
   const router = useRouter();
   const params = useParams();
   const docId = params.id;
-  
+
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -37,30 +37,38 @@ export default function EditDocPage() {
   ];
 
   useEffect(() => {
-    fetchDoc();
+    if (docId) fetchDoc();
   }, [docId]);
 
   async function fetchDoc() {
-    const { data, error } = await supabase
-      .from('docs')
-      .select('*')
-      .eq('id', docId)
-      .single();
-    
-    if (!error && data) {
-      setFormData({
-        title: data.title,
-        slug: data.slug,
-        excerpt: data.excerpt || '',
-        content: data.content,
-        category: data.category,
-        author: data.author,
-        read_time: data.read_time,
-        tags: data.tags || [],
-        is_published: data.is_published
-      });
+    try {
+      const { data, error } = await supabase
+        .from('docs')
+        .select('*')
+        .eq('id', docId)
+        .single();
+
+      if (error) throw error;
+
+      if (data) {
+        setFormData({
+          title: data.title || '',
+          slug: data.slug || '',
+          excerpt: data.excerpt || '',
+          content: data.content || '',
+          category: data.category || 'Getting Started',
+          author: data.author || 'AndroSky Team',
+          read_time: data.read_time || 5,
+          tags: data.tags || [],
+          is_published: data.is_published ?? true
+        });
+      }
+    } catch (error) {
+      console.error('Error fetching doc:', error);
+      alert('Failed to load document data: ' + error.message);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   const handleChange = (e) => {
@@ -95,11 +103,11 @@ export default function EditDocPage() {
         .update({
           title: formData.title,
           slug: formData.slug,
-          excerpt: formData.excerpt,
+          excerpt: formData.excerpt || null,
           content: formData.content,
           category: formData.category,
           author: formData.author,
-          read_time: parseInt(formData.read_time),
+          read_time: parseInt(formData.read_time) || 5,
           tags: formData.tags,
           is_published: formData.is_published,
           updated_at: new Date().toISOString()
@@ -108,7 +116,9 @@ export default function EditDocPage() {
 
       if (error) throw error;
 
+      alert('Changes saved successfully!');
       router.push('/adminboard/docs');
+      router.refresh();
     } catch (error) {
       console.error('Error updating document:', error);
       alert('Failed to update document: ' + error.message);
@@ -128,13 +138,13 @@ export default function EditDocPage() {
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] text-white">
       <div className="p-6 md:p-8">
-        {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="font-['Space_Grotesk'] text-2xl md:text-3xl font-bold text-white">Edit Document</h1>
             <p className="text-[var(--text-primary)] text-sm mt-1">Update documentation content</p>
           </div>
           <button
+            type="button"
             onClick={() => router.back()}
             className="px-4 py-2 bg-white/10 rounded-lg text-white hover:bg-white/20 transition"
           >
@@ -144,9 +154,7 @@ export default function EditDocPage() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid lg:grid-cols-3 gap-6">
-            {/* Main Content Column */}
             <div className="lg:col-span-2 space-y-6">
-              {/* Title */}
               <div className="bg-[var(--surface)]/60 rounded-xl p-6 border border-white/10">
                 <label className="block text-sm font-['JetBrains_Mono'] text-cyan-400 mb-2">Document Title</label>
                 <input
@@ -159,7 +167,6 @@ export default function EditDocPage() {
                 />
               </div>
 
-              {/* Excerpt */}
               <div className="bg-[var(--surface)]/60 rounded-xl p-6 border border-white/10">
                 <label className="block text-sm font-['JetBrains_Mono'] text-cyan-400 mb-2">Short Description / Excerpt</label>
                 <textarea
@@ -171,7 +178,6 @@ export default function EditDocPage() {
                 />
               </div>
 
-              {/* Content Editor */}
               <div className="bg-[var(--surface)]/60 rounded-xl p-6 border border-white/10">
                 <label className="block text-sm font-['JetBrains_Mono'] text-cyan-400 mb-2">Content (HTML)</label>
                 <textarea
@@ -185,9 +191,7 @@ export default function EditDocPage() {
               </div>
             </div>
 
-            {/* Sidebar Column */}
             <div className="space-y-6">
-              {/* Slug */}
               <div className="bg-[var(--surface)]/60 rounded-xl p-6 border border-white/10">
                 <label className="block text-sm font-['JetBrains_Mono'] text-cyan-400 mb-2">URL Slug</label>
                 <input
@@ -200,7 +204,6 @@ export default function EditDocPage() {
                 />
               </div>
 
-              {/* Category */}
               <div className="bg-[var(--surface)]/60 rounded-xl p-6 border border-white/10">
                 <label className="block text-sm font-['JetBrains_Mono'] text-cyan-400 mb-2">Category</label>
                 <select
@@ -215,35 +218,19 @@ export default function EditDocPage() {
                 </select>
               </div>
 
-              {/* Author & Read Time */}
               <div className="bg-[var(--surface)]/60 rounded-xl p-6 border border-white/10">
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-['JetBrains_Mono'] text-cyan-400 mb-2">Author</label>
-                    <input
-                      type="text"
-                      name="author"
-                      value={formData.author}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 bg-[var(--surface-low)] border border-white/10 rounded-lg text-white focus:outline-none focus:border-cyan-400"
-                    />
+                    <input type="text" name="author" value={formData.author} onChange={handleChange} className="w-full px-4 py-3 bg-[var(--surface-low)] border border-white/10 rounded-lg text-white focus:outline-none focus:border-cyan-400" />
                   </div>
                   <div>
                     <label className="block text-sm font-['JetBrains_Mono'] text-cyan-400 mb-2">Read Time (minutes)</label>
-                    <input
-                      type="number"
-                      name="read_time"
-                      value={formData.read_time}
-                      onChange={handleChange}
-                      min="1"
-                      max="60"
-                      className="w-full px-4 py-3 bg-[var(--surface-low)] border border-white/10 rounded-lg text-white focus:outline-none focus:border-cyan-400"
-                    />
+                    <input type="number" name="read_time" value={formData.read_time} onChange={handleChange} min="1" className="w-full px-4 py-3 bg-[var(--surface-low)] border border-white/10 rounded-lg text-white focus:outline-none focus:border-cyan-400" />
                   </div>
                 </div>
               </div>
 
-              {/* Tags */}
               <div className="bg-[var(--surface)]/60 rounded-xl p-6 border border-white/10">
                 <label className="block text-sm font-['JetBrains_Mono'] text-cyan-400 mb-2">Tags</label>
                 <div className="flex gap-2 mb-3">
@@ -251,56 +238,34 @@ export default function EditDocPage() {
                     type="text"
                     value={tagInput}
                     onChange={(e) => setTagInput(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddTag())}
+                    onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddTag())}
                     className="flex-1 px-4 py-2 bg-[var(--surface-low)] border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-cyan-400"
                   />
-                  <button
-                    type="button"
-                    onClick={handleAddTag}
-                    className="px-4 py-2 bg-cyan-500/20 text-cyan-400 rounded-lg hover:bg-cyan-500/30 transition"
-                  >
-                    Add
-                  </button>
+                  <button type="button" onClick={handleAddTag} className="px-4 py-2 bg-cyan-500/20 text-cyan-400 rounded-lg hover:bg-cyan-500/30">Add</button>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {formData.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="inline-flex items-center gap-1 px-2 py-1 bg-purple-500/20 text-purple-400 rounded-full text-xs"
-                    >
+                  {formData.tags.map(tag => (
+                    <span key={tag} className="inline-flex items-center gap-1 px-2 py-1 bg-purple-500/20 text-purple-400 rounded-full text-xs">
                       {tag}
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveTag(tag)}
-                        className="hover:text-white ml-1"
-                      >
-                        ×
-                      </button>
+                      <button type="button" onClick={() => handleRemoveTag(tag)} className="hover:text-white ml-1">×</button>
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* Publish Status */}
               <div className="bg-[var(--surface)]/60 rounded-xl p-6 border border-white/10">
                 <label className="flex items-center justify-between cursor-pointer">
                   <span className="text-sm font-['JetBrains_Mono'] text-cyan-400">Published</span>
                   <input
                     type="checkbox"
-                    name="is_published"
                     checked={formData.is_published}
                     onChange={(e) => setFormData(prev => ({ ...prev, is_published: e.target.checked }))}
-                    className="w-5 h-5 rounded border-white/20 bg-[var(--surface-low)] text-cyan-400 focus:ring-cyan-400"
+                    className="w-5 h-5 rounded border-white/20 bg-[var(--surface-low)] text-cyan-400"
                   />
                 </label>
               </div>
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={submitting}
-                className="w-full py-3 button-gradient rounded-xl text-white font-semibold disabled:opacity-50"
-              >
+              <button type="submit" disabled={submitting} className="w-full py-3 button-gradient rounded-xl text-white font-semibold disabled:opacity-50">
                 {submitting ? 'Saving...' : 'Save Changes'}
               </button>
             </div>

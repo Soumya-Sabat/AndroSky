@@ -1,3 +1,4 @@
+
 // Create Individual Post Page
 import Navbar from '@/component/landing/Navbar'
 import Footer from '@/component/landing/Footer'
@@ -65,8 +66,17 @@ export default async function SinglePostPage({ params }) {
       day: 'numeric'
     })
   }
-
+  const postUrl = `https://androsky.com/transmission-hub/${slug}`;
+  const copyUrl = async () => {
+  try {
+    await navigator.clipboard.writeText(postUrl);
+    alert("Link copied!");
+  } catch (err) {
+    console.error("Failed to copy:", err);
+  }
+};
   return (
+    
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
@@ -131,11 +141,23 @@ export default async function SinglePostPage({ params }) {
             <div className="flex items-center gap-4">
               <span className="text-sm text-[var(--text-primary)]">Share this transmission:</span>
               <button className="p-2 glass rounded-lg hover:bg-white/10 transition-colors">
-                <span className="material-symbols-outlined text-sm">share</span>
+                <Link
+                    href={`https://wa.me/?text=${encodeURIComponent(
+                      `Check out this transmission on AndroSky 🚀\n\n${postUrl}`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="material-symbols-outlined text-sm">share</span>
+                  </Link>
+
               </button>
+
               <button className="p-2 glass rounded-lg hover:bg-white/10 transition-colors">
-                <span className="material-symbols-outlined text-sm">mail</span>
+                <span aria-disabled className="material-symbols-outlined text-sm">mail</span>
               </button>
+    
+
             </div>
             
             <Link href="/transmission-hub" className="text-sm text-[var(--accent-cyan)] hover:text-[var(--accent-purple)] transition-colors flex items-center gap-1">
